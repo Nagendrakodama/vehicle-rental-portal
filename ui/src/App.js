@@ -1,11 +1,14 @@
-import './App.css';
 
-function App() {
+import React from 'react';
+import MultiStepForm from './components/MultiStepForm';
+
+const App = () => {
   return (
-    <div className="App">
-Vehicle Rental Portal
+    <div>
+      <h1>Vehicle Rental Form</h1>
+      <MultiStepForm />
     </div>
   );
-}
+};
 
 export default App;
