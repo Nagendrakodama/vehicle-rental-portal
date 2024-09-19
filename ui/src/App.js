@@ -4,8 +4,7 @@ import MultiStepForm from './components/MultiStepForm';
 
 const App = () => {
   return (
-    <div>
-      <h1>Vehicle Rental Form</h1>
+    <div className='min-h-screen'>
       <MultiStepForm />
     </div>
   );

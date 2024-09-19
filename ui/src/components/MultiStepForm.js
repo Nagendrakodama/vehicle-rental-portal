@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import {
   Stepper,
   Step,
@@ -10,8 +11,11 @@ import {
   Radio,
   CircularProgress,
 } from '@mui/material';
+
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
+
+
 
 const steps = [
   'What is your name?',
@@ -48,16 +52,21 @@ const MultiStepForm = () => {
   };
 
   const renderStepContent = () => {
+ 
     switch (activeStep) {
       case 0:
         return (
           <>
+
             <Controller
               name="firstName"
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                <TextField {...field} label="First Name" required margin="normal" />
+                <div class="flex flex-col">
+                  <label class="leading-loose">First Name</label>
+                  <TextField class="border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" {...field} required margin="normal" />
+                </div>
               )}
             />
             <Controller
@@ -65,7 +74,10 @@ const MultiStepForm = () => {
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                <TextField {...field} label="Last Name" required margin="normal" />
+                <div class="flex flex-col">
+                  <label class="leading-loose">Last Name</label>
+                  <TextField {...field} class="border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" required margin="normal" />
+                </div>
               )}
             />
           </>
@@ -113,20 +125,22 @@ const MultiStepForm = () => {
         );
       case 4:
         return (
-          <>
+          <div className='flex flex-col'>
             <Controller
               name="startDate"
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="Start Date"
-                  type="date"
-                  InputLabelProps={{ shrink: true }}
-                  required
-                  margin="normal"
-                />
+                <div>
+                  <label class="leading-loose">Start Date</label>
+                  <TextField class="border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    {...field}
+                    type="date"
+                    InputLabelProps={{ shrink: true }}
+                    required
+                    margin="normal"
+                  />
+                </div>
               )}
             />
             <Controller
@@ -134,17 +148,20 @@ const MultiStepForm = () => {
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="End Date"
-                  type="date"
-                  InputLabelProps={{ shrink: true }}
-                  required
-                  margin="normal"
-                />
+                <div>
+                  <label class="leading-loose">End Date</label>
+                  <TextField class="border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    {...field}
+                    label="End Date"
+                    type="date"
+                    InputLabelProps={{ shrink: true }}
+                    required
+                    margin="normal"
+                  />
+                </div>
               )}
             />
-          </>
+          </div>
         );
       default:
         return null;
@@ -152,33 +169,43 @@ const MultiStepForm = () => {
   };
 
   return (
-    <div>
-      <Stepper activeStep={activeStep}>
-        {steps.map(label => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          {renderStepContent()}
-          <div>
-            {activeStep > 0 && (
-              <Button onClick={() => setActiveStep(activeStep - 1)}>Back</Button>
-            )}
-            {activeStep === steps.length - 1 ? (
-              <Button type="submit" disabled={loading}>
-                {loading ? <CircularProgress size={24} /> : 'Submit'}
-              </Button>
-            ) : (
-              <Button type="button" onClick={() => setActiveStep(activeStep + 1)}>
-                Next
-              </Button>
-            )}
-          </div>
+    <div className='min-h-dvh flex flex-col'>
+      <div>
+        <h1>Vehicle Rental Form</h1>
+        <Stepper activeStep={activeStep}>
+          {steps.map(label => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      </div>
+      <div className='mx-auto grow grid place-items-center'>
+        <div className='min-w-96 px-4 py-10 bg-white shadow-sm rounded sm:p-10 '>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className='flex flex-col justify-center'>
+              
+              <div>
+                {renderStepContent()}
+                <div className='mt-4'>
+                  {activeStep > 0 && (
+                    <Button className='secondary_btn' onClick={() => setActiveStep(activeStep - 1)}>Back</Button>
+                  )}
+                  {activeStep === steps.length - 1 ? (
+                    <Button className='flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none primary_btn' type="submit" disabled={loading}>
+                      {loading ? <CircularProgress size={24} /> : 'Submit'}
+                    </Button>
+                  ) : (
+                    <Button className='flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none primary_btn' type="button" onClick={() => setActiveStep(activeStep + 1)}>
+                      Next
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

@@ -1,38 +1,47 @@
-.App {
-  text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  background: #FFFBF3;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.css-j882ge-MuiInputBase-root-MuiOutlinedInput-root{
+  width: 100%;
+} 
+
+.css-1jk99ih-MuiInputBase-input-MuiOutlinedInput-input{
+  padding: 10.5px 10px !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.css-1apkmlw-MuiButtonBase-root-MuiButton-root{
+  margin-top: 1rem;
+  background-color: aquamarine;
+  padding: 10.5px 10px !important;
 }
 
-.App-link {
-  color: #61dafb;
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline{
+  border: transparent !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.primary_btn{
+  background: #FFA800 !important;
+  color: #000 !important;
+  font-weight: bold  !important;
+}
+
+.secondary_btn{
+  background: #ffebc3 !important;
+  color: #000 !important;
+  font-weight: bold  !important;
+  width: 100%;
+  margin-bottom: .5rem !important;
 }
