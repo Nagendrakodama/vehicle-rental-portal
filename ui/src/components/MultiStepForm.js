@@ -152,7 +152,6 @@ const MultiStepForm = () => {
                   <label class="leading-loose">End Date</label>
                   <TextField class="border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                     {...field}
-                    label="End Date"
                     type="date"
                     InputLabelProps={{ shrink: true }}
                     required
@@ -170,8 +169,8 @@ const MultiStepForm = () => {
 
   return (
     <div className='min-h-dvh flex flex-col'>
-      <div>
-        <h1>Vehicle Rental Form</h1>
+      <div className='steeper'>
+        {/* <h1>Vehicle Rental Form</h1> */}
         <Stepper activeStep={activeStep}>
           {steps.map(label => (
             <Step key={label}>
