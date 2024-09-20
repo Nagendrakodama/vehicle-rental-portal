@@ -2,7 +2,6 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    // Create VehicleType table
     await queryInterface.createTable('VehicleType', {
       id: {
         type: Sequelize.INTEGER,
@@ -20,7 +19,6 @@ module.exports = {
       },
     });
 
-    // Insert a couple of rows into VehicleType table
     await queryInterface.bulkInsert('VehicleType', [
       {
         noOfWheels: 4,
@@ -46,7 +44,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    // Drop the VehicleType table
     await queryInterface.dropTable('VehicleType');
   }
 };
