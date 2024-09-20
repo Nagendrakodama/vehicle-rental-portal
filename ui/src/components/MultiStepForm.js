@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Stepper,
   Step,
@@ -25,25 +25,56 @@ const steps = [
   'Date range picker'
 ];
 
-const MultiStepForm = () => {
+const MultiStepForm = ({ onFormCompletion }) => {
   const { control, handleSubmit, watch, reset } = useForm();
   const [activeStep, setActiveStep] = useState(0);
   const [vehicleTypes, setVehicleTypes] = useState([]);
   const [models, setModels] = useState([]);
   const [loading, setLoading] = useState(false);
+  
 
   const wheels = watch('wheels');
   const selectedType = watch('selectedType');
 
- 
+  const nextClick = () => {
+    const nextStep = activeStep + 1;
+    setActiveStep(activeStep + 1);
+
+    if (activeStep == 1) {
+      const fetchVehicleTypes = async () => {
+        const response = await axios.get(`http://localhost:3000/api/vehiclestypes/wheels/${wheels}`);
+        setVehicleTypes(response.data);
+        console.log(response.data);
+      };
+      fetchVehicleTypes();
+    }
+
+    if (activeStep == 2) {
+      const fetchModels = async () => {
+        const response = await axios.get(`http://localhost:3000/api/vehicles/${selectedType}`);
+        setModels(response.data);
+        console.log(response.data);
+      };
+      fetchModels();
+    }
+  }
+
 
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      await axios.post('/api/book', data);
+      await axios.post('http://localhost:3000/booking', {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        vehicleId: +data.selectedModel,
+        startDate: data.startDate,
+        endDate: data.endDate
+      });
       alert('Booking successful!');
+      onFormCompletion();
       reset();
       setActiveStep(0);
+      console.log(data);
     } catch (error) {
       alert('Error while booking. Please try again.');
     } finally {
@@ -52,7 +83,7 @@ const MultiStepForm = () => {
   };
 
   const renderStepContent = () => {
- 
+
     switch (activeStep) {
       case 0:
         return (
@@ -103,7 +134,7 @@ const MultiStepForm = () => {
             render={({ field }) => (
               <RadioGroup {...field}>
                 {vehicleTypes.map(type => (
-                  <FormControlLabel key={type} value={type} control={<Radio />} label={type} />
+                  <FormControlLabel key={type.id} value={type.id} control={<Radio />} label={type.name} />
                 ))}
               </RadioGroup>
             )}
@@ -117,7 +148,7 @@ const MultiStepForm = () => {
             render={({ field }) => (
               <RadioGroup {...field}>
                 {models.map(model => (
-                  <FormControlLabel key={model} value={model} control={<Radio />} label={model} />
+                  <FormControlLabel key={model.id} value={model.id} control={<Radio />} label={model.name} />
                 ))}
               </RadioGroup>
             )}
@@ -164,13 +195,12 @@ const MultiStepForm = () => {
         );
       default:
         return null;
-    }
+    } 
   };
 
   return (
     <div className='min-h-dvh flex flex-col'>
       <div className='steeper'>
-        {/* <h1>Vehicle Rental Form</h1> */}
         <Stepper activeStep={activeStep}>
           {steps.map(label => (
             <Step key={label}>
@@ -183,7 +213,7 @@ const MultiStepForm = () => {
         <div className='min-w-96 px-4 py-10 bg-white shadow-sm rounded sm:p-10 '>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='flex flex-col justify-center'>
-              
+
               <div>
                 {renderStepContent()}
                 <div className='mt-4'>
@@ -195,11 +225,12 @@ const MultiStepForm = () => {
                       {loading ? <CircularProgress size={24} /> : 'Submit'}
                     </Button>
                   ) : (
-                    <Button className='flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none primary_btn' type="button" onClick={() => setActiveStep(activeStep + 1)}>
+                    <Button className='flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none primary_btn' type="button" onClick={nextClick}>
                       Next
                     </Button>
                   )}
                 </div>
+
               </div>
             </div>
           </form>

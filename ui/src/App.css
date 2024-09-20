@@ -3,45 +3,66 @@
 @tailwind utilities;
 
 
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-body{
+body {
   background: #FFFBF3;
 }
 
-.css-j882ge-MuiInputBase-root-MuiOutlinedInput-root{
+.css-j882ge-MuiInputBase-root-MuiOutlinedInput-root {
   width: 100%;
-} 
+}
 
-.css-1jk99ih-MuiInputBase-input-MuiOutlinedInput-input{
+.css-1jk99ih-MuiInputBase-input-MuiOutlinedInput-input {
   padding: 10.5px 10px !important;
 }
 
-.css-1apkmlw-MuiButtonBase-root-MuiButton-root{
+.css-1apkmlw-MuiButtonBase-root-MuiButton-root {
   margin-top: 1rem;
   background-color: aquamarine;
   padding: 10.5px 10px !important;
 }
 
-.css-1d3z3hw-MuiOutlinedInput-notchedOutline{
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
   border: transparent !important;
 }
 
 
-.primary_btn{
+.primary_btn {
   background: #FFA800 !important;
   color: #000 !important;
-  font-weight: bold  !important;
+  font-weight: bold !important;
 }
 
-.secondary_btn{
+.secondary_btn {
   background: #ffebc3 !important;
   color: #000 !important;
-  font-weight: bold  !important;
+  font-weight: bold !important;
   width: 100%;
   margin-bottom: .5rem !important;
+}
+
+.steeper {
+  padding: 20px;
+  background: #e89058;
+}
+
+.css-15rfbsb-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
+  color: #feecca !important;
+}
+
+.css-117w1su-MuiStepIcon-text{
+  fill: #000 !important;
+}
+
+.css-15rfbsb-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed {
+  color: antiquewhite !important;
+}
+
+.css-1qv8q39-MuiStepConnector-line{
+  border-color: #00000059 !important;
 }
