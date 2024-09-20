@@ -33,20 +33,20 @@ module.exports = {
     // Insert sample data into Users table
     await queryInterface.bulkInsert('Users', [
       {
-        firstName: 'John',
-        lastName: 'Doe',
+        firstName: 'Nagendra',
+        lastName: 'Kodama',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        firstName: 'Jane',
-        lastName: 'Doe',
+        firstName: 'Nani',
+        lastName: 'Katakam',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        firstName: 'Michael',
-        lastName: 'Smith',
+        firstName: 'Bujji',
+        lastName: 'Katakam',
         createdAt: new Date(),
         updatedAt: new Date()
       }
