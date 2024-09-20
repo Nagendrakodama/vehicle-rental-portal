@@ -1,72 +1,52 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    // Create the VehicleTypes table
-    await queryInterface.createTable('VehicleTypes', {
-      vehicleTypeId: {
-        allowNull: false,
+  up: async (queryInterface, Sequelize) => {
+    // Create VehicleType table
+    await queryInterface.createTable('VehicleType', {
+      id: {
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        allowNull: false,
+      },
+      noOfWheels: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false
-      },
-      NoOfWheels: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        validate: {
-          isIn: [[2, 4]]  // Only allow 2 or 4
-        }
-      },
-      createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-      }
     });
 
-     // Insert data into the Vehicles table
-     await queryInterface.bulkInsert('VehicleTypes', [
+    // Insert a couple of rows into VehicleType table
+    await queryInterface.bulkInsert('VehicleType', [
       {
-        name: 'Sports',
-        NoOfWheels: 2,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
+        noOfWheels: 4,
         name: 'SUV',
-        NoOfWheels: 4,
-        createdAt: new Date(),
-        updatedAt: new Date()
       },
       {
-        name: 'Cruiser',
-        NoOfWheels: 2,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
+        noOfWheels: 4,
         name: 'Sedan',
-        NoOfWheels: 4,
-        createdAt: new Date(),
-        updatedAt: new Date()
       },
-      
+      {
+        noOfWheels: 4,
+        name: 'Hatchback',
+      },
+      {
+        noOfWheels: 2,
+        name: 'Motorbike',
+      },
+      {
+        noOfWheels: 2,
+        name: 'Scooter',
+      },
     ], {});
   },
 
-  
-
-  async down(queryInterface, Sequelize) {
-    // Drop the VehicleTypes table
-    await queryInterface.dropTable('VehicleTypes');
+  down: async (queryInterface, Sequelize) => {
+    // Drop the VehicleType table
+    await queryInterface.dropTable('VehicleType');
   }
 };
