@@ -7,8 +7,9 @@ import BookingList from './components/BookingList';
 const App = () => {
   const [isForm, setIsForm] = useState(true);
 
-  const handleFormCompletion = () => {
-    setIsForm(false);
+  const handleFormCompletion = (value) => {
+    debugger;
+    setIsForm(value);
   };
   
   return (
@@ -16,7 +17,7 @@ const App = () => {
       {isForm ? (
         <MultiStepForm onFormCompletion={handleFormCompletion} />
       ) : (
-        <BookingList />
+        <BookingList setShowForm={handleFormCompletion} />
       )}
     </div>
   );

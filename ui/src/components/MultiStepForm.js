@@ -44,7 +44,6 @@ const MultiStepForm = ({ onFormCompletion }) => {
       const fetchVehicleTypes = async () => {
         const response = await axios.get(`http://localhost:3000/api/vehiclestypes/wheels/${wheels}`);
         setVehicleTypes(response.data);
-        console.log(response.data);
       };
       fetchVehicleTypes();
     }
@@ -53,7 +52,6 @@ const MultiStepForm = ({ onFormCompletion }) => {
       const fetchModels = async () => {
         const response = await axios.get(`http://localhost:3000/api/vehicles/${selectedType}`);
         setModels(response.data);
-        console.log(response.data);
       };
       fetchModels();
     }
@@ -71,10 +69,9 @@ const MultiStepForm = ({ onFormCompletion }) => {
         endDate: data.endDate
       });
       alert('Booking successful!');
-      onFormCompletion();
+      onFormCompletion(false);
       reset();
       setActiveStep(0);
-      console.log(data);
     } catch (error) {
       alert('Error while booking. Please try again.');
     } finally {
